@@ -1,0 +1,4 @@
+mcp>=1.30,<2.0
+PyJWT[crypto]>=2.8,<3.0
+starlette>=0.48,<2.0
+uvicorn>=0.31,<1.0

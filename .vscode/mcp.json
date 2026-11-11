@@ -1,0 +1,12 @@
+{
+  "servers": {
+    "raid-log": {
+      "type": "stdio",
+      "command": "python",
+      "args": ["${workspaceFolder}/raid_server.py"],
+      "env": {
+        "RAID_DB_PATH": "${workspaceFolder}/raid_log.sqlite3"
+      }
+    }
+  }
+}
