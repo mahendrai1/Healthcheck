@@ -57,6 +57,31 @@ actually available and used.
    selection, write confirmation, injection handling, privacy masking, and
    platform approval cannot be established by unit tests or MCP Inspector
    alone.
+8. After each test run, create or replace the self-contained HTML report at
+   `test-results/raid-app-test-report.html`. Include the run timestamp,
+   environment, checks performed, each check's PASS/FAIL/BLOCKED/NOT RUN
+   status, concise observed results, and tests explicitly not run. Include a
+   link to this report in the final response, plus a short text summary. Do not
+   generate a report that implies tests ran if execution was blocked; record
+   that accurately.
+
+## HTML report requirements
+
+- Produce a complete HTML5 page with a descriptive title, semantic headings,
+  an accessible results table, and compact embedded CSS. It must work offline
+  without external fonts, scripts, stylesheets, images, or network requests.
+- Render status labels with both text and distinct visual styling (do not rely
+  on color alone). Keep the page readable on narrow screens and in print.
+- Escape all command output, test names, and other dynamic text before placing
+  it in HTML. Do not embed raw logs, secrets, API keys, access tokens, personal
+  data, or sensitive RAID content; summarize/redact instead.
+- List optional checks such as Docker, HTTP auth, and live Copilot/Platform
+  acceptance as NOT RUN when they were not actually performed. A unit-test
+  pass does not imply an Agent or platform check passed.
+- Create the report directory if needed. Do not add a dependency or run a
+  deployment solely to produce the report.
+- Keep the final chat response concise: summarize the result and link the HTML
+  report using its workspace path.
 
 ## Safety and scope
 
