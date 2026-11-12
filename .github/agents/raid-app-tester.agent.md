@@ -60,10 +60,16 @@ actually available and used.
 8. After each test run, create or replace the self-contained HTML report at
    `test-results/raid-app-test-report.html`. Include the run timestamp,
    environment, checks performed, each check's PASS/FAIL/BLOCKED/NOT RUN
-   status, concise observed results, and tests explicitly not run. Include a
-   link to this report in the final response, plus a short text summary. Do not
-   generate a report that implies tests ran if execution was blocked; record
-   that accurately.
+   status, concise observed results, any error details, and tests explicitly
+   not run. Include a `webURL` in the final response, plus a short summary of
+   the outcome and any failures or errors (or state that there were none). Use
+   an HTTP(S) URL only when an actual hosting or preview server is available
+   and the page has been verified there. Otherwise provide the absolute
+   `file:///` URL and clearly label it as local and not publicly hosted; never
+   invent or imply a public URL. Do not start a server that must remain running
+   unless requested.
+   Do not generate a report that implies tests ran if execution was blocked;
+   record that accurately.
 
 ## HTML report requirements
 
@@ -78,6 +84,9 @@ actually available and used.
 - List optional checks such as Docker, HTTP auth, and live Copilot/Platform
   acceptance as NOT RUN when they were not actually performed. A unit-test
   pass does not imply an Agent or platform check passed.
+- For failed or blocked checks, record the command/check and a concise,
+  sanitized error summary. Do not hide failures or present an error as a pass;
+  omit secrets, access tokens, personal data, and raw sensitive logs.
 - Create the report directory if needed. Do not add a dependency or run a
   deployment solely to produce the report.
 - Keep the final chat response concise: summarize the result and link the HTML
